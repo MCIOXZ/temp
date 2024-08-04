@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘模拟器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        .keyboard {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+        
+        .key {
+            width: 40px;
+            height: 40px;
+            margin: 2px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        .key.sticky {
+            background-color: lightblue;
+        }
+        
+        #server-ip {
+            width: 200px;
+            padding: 5px;
+        }
+        
+        #connect-btn {
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+        
+        #caps-status {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="server-ip" placeholder="输入服务端IP">
+        <button id="connect-btn">连接</button>
+        <div id="caps-status">Caps Lock: Off</div>
+        <div class="keyboard">
+            <!-- Add key buttons with data-key attributes -->
+            <div class="row">
+                <button class="key" data-key="Esc">Esc</button>
+                <button class="key" data-key="F1">F1</button>
+                <button class="key" data-key="F2">F2</button>
+                <button class="key" data-key="F3">F3</button>
+                <button class="key" data-key="F4">F4</button>
+                <button class="key" data-key="F5">F5</button>
+                <button class="key" data-key="F6">F6</button>
+                <button class="key" data-key="F7">F7</button>
+                <button class="key" data-key="F8">F8</button>
+                <button class="key" data-key="F9">F9</button>
+                <button class="key" data-key="F10">F10</button>
+                <button class="key" data-key="F11">F11</button>
+                <button class="key" data-key="F12">F12</button>
+                <button class="key" data-key="Print Screen">PrtSc</button>
+                <button class="key" data-key="Scroll Lock">ScrLk</button>
+                <button class="key" data-key="Pause Break">Pause</button>
+            </div>
+            <div class="row">
+                <button class="key" data-key="~">~</button>
+                <button class="key" data-key="1">1</button>
+                <button class="key" data-key="2">2</button>
+                <button class="key" data-key="3">3</button>
+                <button class="key" data-key="4">4</button>
+                <button class="key" data-key="5">5</button>
+                <button class="key" data-key="6">6</button>
+                <button class="key" data-key="7">7</button>
+                <button class="key" data-key="8">8</button>
+                <button class="key" data-key="9">9</button>
+                <button class="key" data-key="0">0</button>
+                <button class="key" data-key="-">-</button>
+                <button class="key" data-key="=">=</button>
+                <button class="key" data-key="Backspace">Backspace</button>
+            </div>
+            <div class="row">
+                <button class="key" data-key="Tab">Tab</button>
+                <button class="key" data-key="Q">Q</button>
+                <button class="key" data-key="W">W</button>
+                <button class="key" data-key="E">E</button>
+                <button class="key" data-key="R">R</button>
+                <button class="key" data-key="T">T</button>
+                <button class="key" data-key="Y">Y</button>
+                <button class="key" data-key="U">U</button>
+                <button class="key" data-key="I">I</button>
+                <button class="key" data-key="O">O</button>
+                <button class="key" data-key="P">P</button>
+                <button class="key" data-key="[">[</button>
+                <button class="key" data-key="]">]</button>
+                <button class="key" data-key="\\">\\</button>
+            </div>
+            <div class="row">
+                <button class="key" data-key="Caps Lock">Caps Lock</button>
+                <button class="key" data-key="A">A</button>
+                <button class="key" data-key="S">S</button>
+                <button class="key" data-key="D">D</button>
+                <button class="key" data-key="F">F</button>
+                <button class="key" data-key="G">G</button>
+                <button class="key" data-key="H">H</button>
+                <button class="key" data-key="J">J</button>
+                <button class="key" data-key="K">K</button>
+                <button class="key" data-key="L">L</button>
+                <button class="key" data-key=";">;</button>
+                <button class="key" data-key="'">'</button>
+                <button class="key" data-key="Enter">Enter</button>
+            </div>
+            <div class="row">
+                <button class="key" data-key="Shift">Shift</button>
+                <button class="key" data-key="Z">Z</button>
+                <button class="key" data-key="X">X</button>
+                <button class="key" data-key="C">C</button>
+                <button class="key" data-key="V">V</button>
+                <button class="key" data-key="B">B</button>
+                <button class="key" data-key="N">N</button>
+                <button class="key" data-key="M">M</button>
+                <button class="key" data-key=",">,</button>
+                <button class="key" data-key=".">.</button>
+                <button class="key" data-key="/">/</button>
+                <button class="key" data-key="Shift">Shift</button>
+            </div>
+            <div class="row">
+                <button class="key" data-key="Ctrl">Ctrl</button>
+                <button class="key" data-key="Win">Win</button>
+                <button class="key" data-key="Alt">Alt</button>
+                <button class="key" data-key="Space">Space</button>
+                <button class="key" data-key="Alt">Alt</button>
+                <button class="key" data-key="Win">Win</button>
+                <button class="key" data-key="Menu">Menu</button>
+                <button class="key" data-key="Ctrl">Ctrl</button>
+            </div>
+            <div class="row">
+                <button class="key" data-key="Insert">Ins</button>
+                <button class="key" data-key="Home">Home</button>
+                <button class="key" data-key="Page Up">PgUp</button>
+                <button class="key" data-key="Delete">Del</button>
+                <button class="key" data-key="End">End</button>
+                <button class="key" data-key="Page Down">PgDn</button>
+                <button class="key" data-key="Up">↑</button>
+                <button class="key" data-key="Left">←</button>
+                <button class="key" data-key="Down">↓</button>
+                <button class="key" data-key="Right">→</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let socket;
+            let capsLockOn = false;
+            let stickyKeys = {};
+
+            // Set default value of server-ip input element
+            document.getElementById('server-ip').value = location.hostname;
+
+            document.getElementById('connect-btn').addEventListener('click', () => {
+                const serverIp = document.getElementById('server-ip').value;
+                socket = new WebSocket(`ws://${serverIp}:8765`);
+
+                                socket.addEventListener('open', () => {
+                    alert('与服务端连接成功');
+                });
+
+                socket.addEventListener('message', (event) => {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'CAPS_LOCK') {
+                        capsLockOn = data.state;
+						console.log(data)
+						if (capsLockOn=="On"){
+							capsLockOn=true
+						}else{
+							capsLockOn=false
+						}
+                        document.getElementById('caps-status').textContent = `Caps Lock: ${capsLockOn ? 'On' : 'Off'}`;
+                        updateKeysCase(capsLockOn);
+                    } else if (data.type === 'STICKY_KEYS') {
+                        updateStickyKeys(data.stickyKeys);
+                    }
+                });
+
+                socket.addEventListener('close', () => {
+                    alert('与服务端的连接已断开');
+                });
+
+                socket.addEventListener('error', (error) => {
+                    alert('连接错误: ' + error.message);
+                });
+            });
+
+            const keys = document.querySelectorAll('.key');
+
+            keys.forEach(key => {
+                key.addEventListener('mousedown', () => {
+                    if (socket && socket.readyState === WebSocket.OPEN) {
+                        const keyText = key.getAttribute('data-key');
+
+                        if (keyText === 'Shift' || keyText === 'Ctrl' || keyText === 'Win' || keyText === 'Alt') {
+                            socket.send(JSON.stringify({ type: 'STICKY_KEY', key: keyText }));
+							console.log("once")
+                        } else {
+                            let keyToSend = keyText;
+                            if (capsLockOn && /^[a-z]$/i.test(keyText)) {
+                                keyToSend = keyText.toUpperCase();
+                            }
+							console.log("twice")
+                            socket.send(JSON.stringify({ type: 'KEY_PRESS', key: keyToSend }));
+                        }
+                    } else {
+                        alert('尚未连接到服务端');
+                    }
+                });
+
+                // key.addEventListener('mouseup', () => {
+                //     if (socket && socket.readyState === WebSocket.OPEN) {
+                //         const keyText = key.getAttribute('data-key');
+
+                //         if (keyText === 'Shift' || keyText === 'Ctrl' || keyText === 'Win' || keyText === 'Alt') {
+                //             socket.send(JSON.stringify({ type: 'STICKY_KEY', key: keyText }));
+                //         }
+                //     }
+                // });
+            });
+
+            function updateKeysCase(isCapsLockOn) {
+				console.log(isCapsLockOn)
+                keys.forEach(key => {
+                    let keyText = key.getAttribute('data-key');
+                    if (/^[a-z]$/i.test(keyText)) {
+                        keyText = isCapsLockOn ? keyText.toUpperCase() : keyText.toLowerCase();
+                        key.setAttribute('data-key', keyText);
+                        key.innerHTML = keyText;
+                    }
+                });
+            }
+
+            function updateStickyKeys(stickyKeys) {
+                keys.forEach(key => {
+                    const keyText = key.getAttribute('data-key');
+                    if (stickyKeys[keyText]) {
+                        key.classList.add('sticky');
+                    } else {
+                        key.classList.remove('sticky');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
